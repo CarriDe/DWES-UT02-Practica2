@@ -7,11 +7,12 @@
         h3{
             color: darkblue;
         }
+        h2{
+            color: darkred;
+        }
         </style>
     </head>
     <body>
-        <h2>Datos de Socios</h2>
-
         <?php
         # Info sobre los tipos de array en PHP -> https://www.php.net/manual/es/language.types.array.php
 
@@ -21,7 +22,7 @@
             "ID1" => [
                 "ID" => 1,
                 "Nombre" => "Sabrina",
-                "Apellidos" => "Spellman Spellman",
+                "Apellidos" => "Spellman",
                 "DNI" => "98765432Q",
                 "Mail" => "salem@witch.com",
                 "Móvil" => 666222666,
@@ -64,7 +65,10 @@
                 ]
             ]
         ];
+        ?>
 
+        <h2>Datos de Socios</h2>
+        <?php
         # Loop para sacar la información del array.
         foreach ($socios as $a => $info) { 
             # . es el operador que une texto y variable; <br> pal salto de línea
@@ -75,11 +79,28 @@
             echo "<b>Mail:</b> ".$info["Mail"]."<br>";
             echo "<b>Móvil:</b> ".$info["Móvil"]."<br><br>";
         }
-
         ?>
-        <!-- -->
-        <h2>Tabla de pagos mensuales</h2> 
+
+        <h2>Tabla de pagos mensuales</h2>
+        <?php
+        # Loop para sacar la información del array.
+        foreach ($socios as $a => $info) { 
+            # . es el operador que une texto y variable; <br> pal salto de línea
+            echo "<h3>".$info["Nombre"]." ".$info["Apellidos"]." - ID".$info["ID"]."</h3><br>";
+            echo "<table>";
+            echo "
+                <tr>
+                    <th>Referencia</th>
+                    <th>Mes</th>
+                    <th>Importe</th>
+                    <th>Estado</th>
+                    <th>Fecha de pago</th>
+                </tr>";
+            echo "";
+
+            echo "</table>";
+        }
+        ?>
+
     </body>
 </html>
-
-

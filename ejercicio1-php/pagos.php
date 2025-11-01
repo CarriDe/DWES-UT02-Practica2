@@ -1,9 +1,16 @@
 <html>
     <head>
-
+        <style>
+        body{
+            font-family: "Arial"
+        }
+        h3{
+            color: darkblue;
+        }
+        </style>
     </head>
     <body>
-        <h1>Datos de 1 socio (hay 2)</h1>
+        <h2>Datos de Socios</h2>
 
         <?php
         # Info sobre los tipos de array en PHP -> https://www.php.net/manual/es/language.types.array.php
@@ -61,17 +68,17 @@
         # Loop para sacar la información del array.
         foreach ($socios as $a => $info) { 
             # . es el operador que une texto y variable; <br> pal salto de línea
-            echo "ID".$info["ID"]."<br>";
-            echo "Nombre: ".$info["Nombre"]."<br>";
-            echo "Apellidos: ".$info["Apellidos"]."<br>";
-            echo "DNI: ".$info["DNI"]."<br>";
-            echo "Mail: ".$info["Mail"]."<br>";
-            echo "Móvil: ".$info["Móvil"]."<br>";
+            echo "<h3>ID".$info["ID"]."</h3>";
+            echo "<b>Nombre:</b> ".$info["Nombre"]."<br>";
+            echo "<b>Apellidos:</b> ".$info["Apellidos"]."<br>";
+            echo "<b>DNI:</b> ".$info["DNI"]."<br>";
+            echo "<b>Mail:</b> ".$info["Mail"]."<br>";
+            echo "<b>Móvil:</b> ".$info["Móvil"]."<br><br>";
         }
 
         ?>
         <!-- -->
-        <h1>Tabla de pagos mensuales</h1> 
+        <h2>Tabla de pagos mensuales</h2> 
     </body>
 </html>
 

@@ -82,23 +82,13 @@
         <h2>Datos de Socios</h2>
         <?php
         # Loop para sacar la información del array.
-        foreach ($socios as $a => $info) { 
-            # . es el operador que une texto y variable; <br> pal salto de línea
-            echo "<h3>ID".$info["ID"]."</h3>";
-            echo "<b>Nombre:</b> ".$info["Nombre"]."<br>";
-            echo "<b>Apellidos:</b> ".$info["Apellidos"]."<br>";
-            echo "<b>DNI:</b> ".$info["DNI"]."<br>";
-            echo "<b>Mail:</b> ".$info["Mail"]."<br>";
-            echo "<b>Móvil:</b> ".$info["Móvil"]."<br><br>";
-        }
-        ?>
-
-        <h2>Tabla de pagos mensuales</h2>
-        <?php
-        # Loop para sacar la información del array.
         foreach ($socios as $a => $info) {
             # . es el operador que une texto y variable; <br> pal salto de línea
-            echo "<h3>".$info["Nombre"]." ".$info["Apellidos"]." - ID".$info["ID"]."</h3><br>";
+            echo "<h3>".$info["Nombre"]." ".$info["Apellidos"]." - ID".$info["ID"]."</h3>";
+            echo "<b>DNI:</b> ".$info["DNI"]."  -  ";
+            echo "<b>Mail:</b> ".$info["Mail"]."  -  ";
+            echo "<b>Móvil:</b> ".$info["Móvil"]."<br><br>";
+
             echo "<table>";
             echo "
                 <tr>

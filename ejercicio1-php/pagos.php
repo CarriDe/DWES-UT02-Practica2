@@ -101,16 +101,26 @@
 
             #$info, no $socios
             foreach ($info["pagos"] as $a => $pago) {
-                    echo "<tr>";
-                    echo "<td>$a</td>";
-                    echo "<td>".$pago["mes"]."</td>";
-                    echo "<td>".$pago["Importe"]."</td>";
-                    echo "<td>".$pago["estado"]."</td>";
-                    # Si Fecha de pago es null, pon -
-                    echo "<td>".($pago["Fecha de pago"]??"-")."</td>";
-                    echo "</tr>";
-                }
+                echo "<tr>";
+                echo "<td>$a</td>";
+                echo "<td>".$pago["mes"]."</td>";
+                echo "<td>".$pago["Importe"]."</td>";
+                echo "<td>".$pago["estado"]."</td>";
+                # Si Fecha de pago es null, pon -
+                echo "<td>".($pago["Fecha de pago"]??"-")."</td>";
+                echo "</tr>";
+            }
+            # Seleccionamos todos los importes y los sumamos 
+            $importes = array_column($info["pagos"], "Importe");
+            $totalimportes = array_sum($importes);
+            echo "
+                <tr>
+                    <td>Total</td>
+                    <td>$totalimportes</td>  
+                </tr>";
+
             echo "</table>";
+            echo "Pago anual: ".$totalimportes;
         }
         ?>
 

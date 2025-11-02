@@ -11,16 +11,24 @@
             color: darkred;
         }
         table {
-            border-collapse: collapse;
+            border-collapse: separate;
+            border: 1px solid black;
+            border-spacing: 0;
+            border-radius: 10px;
+            overflow: hidden;
             width: 50%;
         }
         th, td {
-            border: 1px solid black;
+            border: 1px solid #c1d0ffff;
             padding: 8px;
             text-align: left;
         }
         th {
             background-color: #c1d0ffff;
+        }
+        .color-rojo{
+            background: #ffbbbbff;
+            color: red;
         }
         </style>
     </head>
@@ -104,8 +112,8 @@
                 echo "<tr>";
                 echo "<td>$a</td>";
                 echo "<td>".$pago["mes"]."</td>";
-                echo "<td>".$pago["Importe"]."</td>";
-                echo "<td>".$pago["estado"]."</td>";
+                echo "<td>".$pago["Importe"]." €</td>";
+                echo "<td class='".($pago["estado"]==="Pendiente"?"color-rojo":"")."'>".$pago["estado"]."</td>";
                 # Si Fecha de pago es null, pon -
                 echo "<td>".($pago["Fecha de pago"]??"-")."</td>";
                 echo "</tr>";
@@ -115,12 +123,14 @@
             $totalimportes = array_sum($importes);
             echo "
                 <tr>
-                    <td>Total</td>
-                    <td>$totalimportes</td>  
+                    <td><b>Total</td>
+                    <td></td>
+                    <td><b>$totalimportes €</td>
+                    <td></td>
+                    <td></td>
                 </tr>";
 
             echo "</table>";
-            echo "Pago anual: ".$totalimportes;
         }
         ?>
 

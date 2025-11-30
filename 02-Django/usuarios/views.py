@@ -25,6 +25,13 @@ def usuario_view(request):
             "diciembre": 20
         }
     }
+
+    # Generar la lista de pagos mensuales en HTML
+    pagos = "<ul>"
+    for mes, cantidad in datos["pagos"].items():
+        pagos += f"<li><strong>{mes.capitalize()}:</strong> {cantidad}€</li>"
+    pagos += "</ul>"
+
     html = f"""
     <html>
         <head><title>Datos de un Usuario</title></head>
@@ -32,37 +39,14 @@ def usuario_view(request):
             <h1>Información personal</h1>
             <!--Para incluir datos que se encuentran en la vista, usamos llaves como se ve a continuación -->
             <h3>{datos['nombre']} {datos['apellidos']}</h3>
-            <p><strong>Apellidos:</strong> </p>
-            <p><strong>Edad:</strong> {datos['edad']}</p>
+            <p><strong>DNI:</strong> {datos['dni']}</p>
+            <p><strong>Teléfono:</strong> {datos['telefono']}</p>
             <p><strong>Email:</strong> {datos['email']}</p>
+
+            <h1>Pagos mensuales</h1>
+            {pagos}
         </body>
     </html>
-
-
     """
-'''
 
-
-
-
-# Mostrar los datos personales
-print("=== Datos del usuario ===")
-print(f"Nombre: {usuario['nombre']}")
-print(f"Apellidos: {usuario['apellidos']}")
-print(f"DNI: {usuario['dni']}")
-print(f"Email: {usuario['email']}")
-print(f"Teléfono: {usuario['telefono']}\n")
-
-# Mostrar pagos mes a mes
-print("=== Pagos de la asociación ===")
-total_pagado = 0
-for mes, cantidad in usuario["pagos"].items():
-    estado = "PAGADO" if cantidad > 0 else "PENDIENTE"
-    print(f"{mes.capitalize():<10}: {cantidad} € -> {estado}")
-    total_pagado += cantidad
-
-print("\nTotal anual pagado:", total_pagado, "€")
-'''
-
-
-return HttpResponse(html)
+    return HttpResponse(html)

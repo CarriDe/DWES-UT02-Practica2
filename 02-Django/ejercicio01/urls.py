@@ -19,6 +19,6 @@ from django.urls import path
 from usuarios.views import usuario_view
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('usuario/', usuario_view),
+    path('admin/', admin.site.urls),
 ]

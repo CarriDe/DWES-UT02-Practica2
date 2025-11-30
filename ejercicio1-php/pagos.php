@@ -36,9 +36,10 @@
         <?php
         # Info sobre los tipos de array en PHP -> https://www.php.net/manual/es/language.types.array.php
 
+        # Array indexado: Se crean con "array(...)" o "[...]". Ejemplo -> $array = array("foo", "bar", "hello", "world");
         # Array multidimensional: Tiene uno o más arrays dentro de otro array. En nuestro caso un array, dentro de un array, dentro de un array. Nada confuso.
         $socios = [
-            #Array asociativos ID1, ID2
+            #Array asociativos (ID1, ID2) se crean usando las claves => valores.
             "ID1" => [
                 "ID" => 1,
                 "Nombre" => "Sabrina",

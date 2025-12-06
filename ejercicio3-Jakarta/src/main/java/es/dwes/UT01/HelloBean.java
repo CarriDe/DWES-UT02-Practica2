@@ -12,16 +12,35 @@ public class HelloBean implements Serializable {
 
     // Práctica 2: Genera en este bean el listado de usuarios que 
     // se mostrará en la página.xhtml
-        
-    private String nombre = "María";
-    private int edad = 28;
+    private List<Usuario> usuarios = List.of(
+        new Usuario(
+            "Sabrina",
+            "Spellman",
+            "12345678A",
+            "salem@greendale.com",
+            28,
+            Map.of(
+                "Enero", 50.0,
+                "Febrero", null,
+                "Marzo", 50.0
+            )
+        ),
+        new Usuario(
+            "Harley",
+            "Krinkle",
+            "98765432B",
+            "Harv@greendale.com",
+            35,
+            Map.of(
+                "Enero", 30.0,
+                "Febrero", 30.0,
+                "Marzo", null
+            )
+        )
+    );
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public int getEdad() {
-        return edad;
+    public List<Usuario> getUsuarios() {
+        return usuarios;
     }
 
     public List<Producto> getProductos() {
@@ -47,5 +66,30 @@ public class HelloBean implements Serializable {
         public double getPrecio() { return precio; }
     }
 // Práctica 2: Crea aquí la clase que defina a un usuario
-    
+    public static class Usuario {
+        private String nombre;
+        private String apellidos;
+        private String dni;
+        private String email;
+        private int edad;
+        private Map<String, Double> pagos;
+
+        public Usuario(String nombre, String apellidos, String dni, String email, int edad,
+                       Map<String, Double> pagos) {
+            this.nombre = nombre;
+            this.apellidos = apellidos;
+            this.dni = dni;
+            this.email = email;
+            this.edad = edad;
+            this.pagos = pagos;
+        }
+
+        public String getNombre() { return nombre; }
+        public String getApellidos() { return apellidos; }
+        public String getDni() { return dni; }
+        public String getEmail() { return email; }
+        public int getEdad() { return edad; }
+        public Map<String, Double> getPagos() { return pagos; }
+    }    
+
 }

@@ -62,7 +62,7 @@ public class HelloBean implements Serializable {
         private String email;
         private int edad;
         private Map<String, Double> pagos;
-        private double totalpagos;
+        //private double totalpagos;
 
         // Constructor
         public Usuario(String nombre, String apellidos, String dni, String email, int edad) {

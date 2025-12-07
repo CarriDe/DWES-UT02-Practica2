@@ -2,6 +2,8 @@ package es.dwes.UT01;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
@@ -9,37 +11,23 @@ import jakarta.inject.Named;
 @Named("helloBean")
 @RequestScoped
 public class HelloBean implements Serializable {
+    // Práctica 2: Genera en este bean el listado de usuarios que se mostrará en la página.xhtml
+    private Usuario[] usuarios;
+ 
+    public HelloBean() {
+        Usuario sabrina = new Usuario("Sabrina", "Spellman", "11111111A", "sabrina@greendale.com", 16);
+        sabrina.addPago("Enero", 30.0);
+        sabrina.addPago("Febrero", 30.0);
 
-    // Práctica 2: Genera en este bean el listado de usuarios que 
-    // se mostrará en la página.xhtml
-    private List<Usuario> usuarios = List.of(
-        new Usuario(
-            "Sabrina",
-            "Spellman",
-            "12345678A",
-            "salem@greendale.com",
-            28,
-            Map.of(
-                "Enero", 50.0,
-                "Febrero", null,
-                "Marzo", 50.0
-            )
-        ),
-        new Usuario(
-            "Harley",
-            "Krinkle",
-            "98765432B",
-            "Harv@greendale.com",
-            35,
-            Map.of(
-                "Enero", 30.0,
-                "Febrero", 30.0,
-                "Marzo", null
-            )
-        )
-    );
+        Usuario harvey = new Usuario("Harvey", "Kinkle", "22222222B", "harvey@greendale.com", 17);
+        harvey.addPago("Enero", null);  
+        harvey.addPago("Febrero", 25.0);
 
-    public List<Usuario> getUsuarios() {
+        // Array final con los dos usuarios
+        usuarios = new Usuario[] { sabrina, harvey };
+    }
+
+    public Usuario[] getUsuarios() {
         return usuarios;
     }
 
@@ -65,7 +53,8 @@ public class HelloBean implements Serializable {
         public String getNombre() { return nombre; }
         public double getPrecio() { return precio; }
     }
-// Práctica 2: Crea aquí la clase que defina a un usuario
+
+    // Práctica 2: Crea aquí la clase que defina a un usuario
     public static class Usuario {
         private String nombre;
         private String apellidos;
@@ -73,23 +62,30 @@ public class HelloBean implements Serializable {
         private String email;
         private int edad;
         private Map<String, Double> pagos;
+        private double totalpagos;
 
-        public Usuario(String nombre, String apellidos, String dni, String email, int edad,
-                       Map<String, Double> pagos) {
+        // Constructor
+        public Usuario(String nombre, String apellidos, String dni, String email, int edad) {
             this.nombre = nombre;
             this.apellidos = apellidos;
             this.dni = dni;
             this.email = email;
             this.edad = edad;
-            this.pagos = pagos;
+            this.pagos = new HashMap<>();
         }
 
+        // Getters
         public String getNombre() { return nombre; }
         public String getApellidos() { return apellidos; }
         public String getDni() { return dni; }
         public String getEmail() { return email; }
         public int getEdad() { return edad; }
         public Map<String, Double> getPagos() { return pagos; }
-    }    
+
+        // Poner pagos en el mapa
+        public void addPago(String mes, Double cantidad) {
+            pagos.put(mes, cantidad);
+        }
+    }
 
 }

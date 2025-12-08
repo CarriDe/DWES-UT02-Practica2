@@ -18,10 +18,15 @@ public class HelloBean implements Serializable {
         Usuario sabrina = new Usuario("Sabrina", "Spellman", "11111111A", "sabrina@greendale.com", 16);
         sabrina.addPago("Enero", 30.0);
         sabrina.addPago("Febrero", 30.0);
+        sabrina.addPago("Marzo", null);
+        sabrina.addPago("Abril", 100.0);
+
 
         Usuario harvey = new Usuario("Harvey", "Kinkle", "22222222B", "harvey@greendale.com", 17);
         harvey.addPago("Enero", null);  
         harvey.addPago("Febrero", 25.0);
+        harvey.addPago("Marzo", 25.0);        
+        harvey.addPago("Abril", 25.0);
 
         // Array final con los dos usuarios
         usuarios = new Usuario[] { sabrina, harvey };
@@ -86,6 +91,16 @@ public class HelloBean implements Serializable {
         public void addPago(String mes, Double cantidad) {
             pagos.put(mes, cantidad);
         }
+
+        // Total de pagos
+        public double getTotalPagos() {
+            double total = 0;
+
+            for (Double cantidad : pagos.values()) {
+                if (cantidad != null) total += cantidad;
+            }
+            return total;
+        }   
     }
 
 }

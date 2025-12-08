@@ -8,6 +8,38 @@
 <h:head>
     <title>Ejemplo02 usando JSF con Jakarta EE 10</title>
     <meta charset="UTF-8"/>
+
+    <style>
+        body{
+            font-family: "Arial"
+        }
+        h3{
+            color: darkblue;
+        }
+        h2{
+            color: darkred;
+        }
+        table {
+            border-collapse: separate;
+            border: 1px solid black;
+            border-spacing: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 50%;
+        }
+        th, td {
+            border: 1px solid #c1d0ffff;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #c1d0ffff;
+        }
+        .color-rojo{
+            background: #ffbbbbff;
+            color: red;
+        }
+    </style>
 </h:head>
 
 <h:body>
@@ -15,49 +47,57 @@
     <h2>Ejercicio ampliado con bucles y condicionales</h2>
 
     <h2>Lista de usuarios:</h2>
-    <h:dataTable value="#{helloBean.usuarios}" var="u" border="1">
+    <h:dataTable value="#{helloBean.usuarios}" var="usuarios" border="1">
         <h:column>
             <f:facet name="header">Nombre</f:facet>
-            #{u.nombre}
+            #{usuarios.nombre}
         </h:column>
         <h:column>
             <f:facet name="header">Apellidos</f:facet>
-            #{u.apellidos}
+            #{usuarios.apellidos}
         </h:column>
         <h:column>
             <f:facet name="header">DNI</f:facet>
-            #{u.dni}
+            #{usuarios.dni}
         </h:column>
         <h:column>
             <f:facet name="header">Email</f:facet>
-            #{u.email}
+            #{usuarios.email}
         </h:column>
         <h:column>
             <f:facet name="header">Edad</f:facet>
-            #{u.edad}
+            #{usuarios.edad}
         </h:column>
         <h:column>
             <f:facet name="header">Pagos</f:facet>
-            <!-- Sub-bucle para mostrar pagos por mes -->
-            <ui:repeat value="#{u.pagos.entrySet()}" var="pago">
+
+            <ui:repeat value="#{usuarios.pagos.entrySet()}" var="pago">
                 <div>
-                    #{pago.key}: 
-                    <h:outputText value="#{pago.value != null ? pago.value : 'No pagado'}" />
-                    €
+                    #{pago.key}:
+                    <h:panelGroup rendered="#{pago.value != null}">
+                        #{pago.value} €
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{pago.value == null}">
+                        <span style="color:red; font-weight:bold;">NO PAGADO</span>
+                    </h:panelGroup>
                 </div>
-            </ui:repeat>
+            </ui:repeat><br/>
+            <b>Total anual: #{usuarios.totalPagos} €</b><br/>
+
+            <h:panelGroup rendered="#{usuarios.totalPagos lt 100}">
+                <span style="color:red; font-weight:bold;">
+                    El usuario no está al día con la cuota.
+                </span>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{usuarios.totalPagos ge 100}">
+                <span style="color:green; font-weight:bold;">
+                    El usuario está al corriente de pagos.
+                </span>
+            </h:panelGroup>            
         </h:column>
     </h:dataTable>
     
-
-    <!-- Condicional: solo se muestra si edad > 18 -->
-    <h:panelGroup rendered="#{helloBean.edad gt 18}">
-        <p><b>El usuario es mayor de edad.</b></p>
-    </h:panelGroup>
-
-    <h:panelGroup rendered="#{helloBean.edad le 18}">
-        <p><b>El usuario es menor de edad.</b></p>
-    </h:panelGroup>
  <!-- Práctica 2: 
         * Añade aquí la sección para mostrar la lista de usuarios.
         * Comprueba si quieres primero que se muestra uno y después genera a todos.
